@@ -1,4 +1,8 @@
-<gif-list-item [gifs]="gifs()"/>
+<div class="grid grid-col-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+  @for(images of gifs();track images.url){
+    <gif-list-item [imageUrl]="images.url" [imageAlt]="images.alt"/>
+  }
+</div>
 
 
 

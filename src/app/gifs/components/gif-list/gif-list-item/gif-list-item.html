@@ -1,9 +1,4 @@
-<div class="grid grid-col-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-  @for(images of gifs();track images.url){
-    <div>
-      <img class="h-auto max-w-full rounded-lg" src="{{images.url}}" alt="{{images.alt}}">
-    </div>
-  }
+<img class="h-auto max-w-full rounded-lg" [src]="imageUrl()" [alt]="imageAlt()">
 
-</div>
+
 

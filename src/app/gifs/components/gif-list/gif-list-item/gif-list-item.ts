@@ -6,5 +6,6 @@ import { Component, Input, input } from '@angular/core';
   templateUrl: './gif-list-item.html',
 })
 export class GifListItem {
-  gifs = input.required<Images[]>();
+  imageUrl = input.required<string>();
+  imageAlt = input.required<string>();
 }
