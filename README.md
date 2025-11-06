@@ -4,8 +4,12 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 ## Development server
 
-To start a local development server, run:
-
+1. Clone the repository
+2. Install the dependencies
+```bash
+npm install
+```
+3. Init the server
 ```bash
 ng serve
 ```
