@@ -1,11 +1,20 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { environment } from '@environments/environment';
 import { GiphyResponse } from '../interfaces/giphy.interface';
 import { Gif } from '../interfaces/gif.interface';
 import { GifMapper } from '../mapper/gif.mapper';
 import Trending from '../pages/trending/trending-page';
 import { map, tap } from 'rxjs';
+
+const GIF_KEY = 'searchHistory';
+
+
+const loadLocalStorage = () => {
+  const gifsFromLs = localStorage.getItem(GIF_KEY) ?? '{}';
+  const gifs = JSON.parse(gifsFromLs);
+  return gifs;
+}
 
 @Injectable({providedIn: 'root'})
 export class GifService {
@@ -14,12 +23,17 @@ export class GifService {
 
   trendingGifs = signal<Gif[]>([]);
   TrendingLoading = signal(true);
-  searchHistory = signal<Record<string, Gif[]>>({});
+  searchHistory = signal<Record<string, Gif[]>>(loadLocalStorage());
   searchHistoryKeys = computed(()=> Object.keys(this.searchHistory()))
 
   constructor(){
     this.loadTrendingGifs();
   }
+
+  saveToLocalStorage = effect(() => {
+    localStorage.setItem(GIF_KEY, JSON.stringify(this.searchHistory()));
+  })
+
 
   loadTrendingGifs(){
 
